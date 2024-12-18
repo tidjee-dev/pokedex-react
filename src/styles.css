@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .container {
+    @apply max-w-[90%] mx-auto p-4;
+  }
+}
+
+/* Focus */
+:focus {
+  @apply outline-primary;
+}
+
+/* Links */
+.nav-link {
+  @apply italic hover:text-primary;
+}
 
 /* Buttons */
 .btn {
