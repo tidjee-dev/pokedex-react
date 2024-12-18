@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 
-const Header = () => {
+const Header = ({ onSearch }: { onSearch: (name: string) => void }) => {
   const [pokemonList, setPokemonList] = useState<string[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<string[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPokemonList = async () => {
@@ -17,7 +16,6 @@ const Header = () => {
         );
       } catch (error) {
         console.error("Error fetching Pokémon data:", error);
-        setError("Failed to load Pokémon data. Please try again later.");
       }
     };
 
@@ -36,8 +34,13 @@ const Header = () => {
     }
   };
 
+  const handleSelectPokemon = (name: string) => {
+    onSearch(name);
+    setFilteredPokemon([]);
+  };
+
   return (
-    <header className="flex bg-danger-light h-[5rem] sticky top-0 w-full">
+    <header className="sticky top-0 flex w-full bg-danger-light z-[9999] h-[5rem]">
       <nav className="container flex flex-col items-center justify-center space-y-2 mobile:justify-between mobile:flex-row">
         <div>
           <h1 className="flex items-baseline text-xl font-bold mobile:flex-col mobile:text-2xl laptop:text-3xl">
@@ -73,12 +76,22 @@ const Header = () => {
           />
           <datalist id="pokemon-options">
             {filteredPokemon.map((pokemon) => (
-              <option key={pokemon} value={pokemon}>
+              <option
+                key={pokemon}
+                value={pokemon}
+                aria-label={pokemon}
+                onClick={() => handleSelectPokemon(pokemon)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    handleSelectPokemon(pokemon);
+                  }
+                }}
+                className="cursor-pointer"
+              >
                 {pokemon}
               </option>
             ))}
           </datalist>
-          {error && <p className="text-sm text-red-500">{error}</p>}
         </div>
       </nav>
     </header>
