@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,13 +15,17 @@
 }
 
 /* Links */
+a {
+  @apply hover:text-primary;
+}
+
 .nav-link {
   @apply italic hover:text-primary;
 }
 
 /* Buttons */
 .btn {
-  @apply py-2 px-4 rounded-full;
+  @apply px-4 py-2 rounded-full;
 }
 
 .btn-sm {
@@ -28,25 +33,62 @@
 }
 
 .btn-primary {
-  @apply bg-primary hover:bg-primary-subtle text-primary-subtle hover:text-primary border border-primary-dark;
+  @apply border bg-primary hover:bg-primary-subtle text-primary-subtle hover:text-primary border-primary-dark;
 }
 
 .btn-secondary {
-  @apply bg-secondary hover:bg-secondary-subtle text-secondary-subtle hover:text-secondary border border-secondary-dark;
+  @apply border bg-secondary hover:bg-secondary-subtle text-secondary-subtle hover:text-secondary border-secondary-dark;
 }
 
 .btn-success {
-  @apply bg-success hover:bg-success-subtle text-success-subtle hover:text-success border border-success-dark;
+  @apply border bg-success hover:bg-success-subtle text-success-subtle hover:text-success border-success-dark;
 }
 
 .btn-warning {
-  @apply bg-warning hover:bg-warning-subtle text-warning-subtle hover:text-warning-dark border border-warning-dark;
+  @apply border bg-warning hover:bg-warning-subtle text-warning-subtle hover:text-warning-dark border-warning-dark;
 }
 
 .btn-danger {
-  @apply bg-danger hover:bg-danger-subtle text-danger-subtle hover:text-danger border border-danger-dark;
+  @apply border bg-danger hover:bg-danger-subtle text-danger-subtle hover:text-danger border-danger-dark;
 }
 
 .btn-info {
-  @apply bg-info hover:bg-info-subtle text-info-dark border-info-dark border;
+  @apply border bg-info hover:bg-info-subtle text-info-dark border-info-dark;
+}
+
+/* Badges */
+.badge {
+  @apply px-2 py-1 text-sm font-bold rounded-full;
+}
+
+.badge-sm {
+  @apply px-1 text-xs rounded-full py-0.5 font-bold;
+}
+
+.badge-lg {
+  @apply px-3 py-2 text-lg font-bold rounded-full;
+}
+
+.badge-primary {
+  @apply border bg-primary-subtle text-primary-dark border-primary-dark;
+}
+
+.badge-secondary {
+  @apply border bg-secondary-subtle text-secondary-dark border-secondary-dark;
+}
+
+.badge-danger {
+  @apply border bg-danger-subtle text-danger-dark border-danger-dark;
+}
+
+.badge-success {
+  @apply border bg-success-subtle text-success-dark border-success-dark;
+}
+
+.badge-warning {
+  @apply border bg-warning-subtle text-warning-dark border-warning-dark;
+}
+
+.badge-info {
+  @apply border bg-info-subtle text-info-dark border-info-dark;
 }
