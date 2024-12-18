@@ -107,7 +107,7 @@
 }
 
 /*
-! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -784,6 +784,11 @@ video {
   color: rgb(213 228 255 / var(--tw-text-opacity, 1));
 }
 
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
+
 .text-secondary-subtle {
   --tw-text-opacity: 1;
   color: rgb(255 225 254 / var(--tw-text-opacity, 1));
@@ -797,6 +802,10 @@ video {
 .text-warning-subtle {
   --tw-text-opacity: 1;
   color: rgb(255 245 197 / var(--tw-text-opacity, 1));
+}
+
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 /* Focus */
@@ -940,16 +949,6 @@ video {
 
 .placeholder\:text-center::placeholder {
   text-align: center;
-}
-
-.placeholder\:text-dark::-moz-placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(20 23 26 / var(--tw-text-opacity, 1));
-}
-
-.placeholder\:text-dark::placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(20 23 26 / var(--tw-text-opacity, 1));
 }
 
 .placeholder\:text-muted::-moz-placeholder {
