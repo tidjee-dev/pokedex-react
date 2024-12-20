@@ -4,7 +4,7 @@ import PokemonData from "../interface/PokemonData"; // Assuming you have this in
 const PokemonList = ({ onSelect }: { onSelect: (name: string) => void }) => {
   const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [visibleItems, setVisibleItems] = useState<number>(50);
+  const [visibleItems, setVisibleItems] = useState<number>(20);
   const loadMoreThreshold = 20;
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const PokemonList = ({ onSelect }: { onSelect: (name: string) => void }) => {
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.scrollHeight - 100
+      document.documentElement.scrollHeight - 500
     ) {
       setVisibleItems((prev) => prev + loadMoreThreshold);
     }
