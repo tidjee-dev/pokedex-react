@@ -1,18 +1,20 @@
+import { Link } from "react-router";
 import { useEffect, useState } from "react";
-import PokemonData from "../interface/PokemonData"; // Assuming you have this interface for Pokémon data
+import PokemonData from "../interface/PokemonData";
 
-const PokemonList = ({ onSelect }: { onSelect: (name: string) => void }) => {
+const PokemonList = () => {
   const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [visibleItems, setVisibleItems] = useState<number>(20);
   const loadMoreThreshold = 20;
 
   useEffect(() => {
-    const fetchPokemonList = async () => {
+    const fetchPokemonList = async (limit: number = 1025) => {
       try {
         const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=2000"
+          `https://pokeapi.co/api/v2/pokemon?limit=${limit}`
         );
+
         const data = await response.json();
         const pokemonData = await Promise.all(
           data.results.map(
@@ -20,6 +22,7 @@ const PokemonList = ({ onSelect }: { onSelect: (name: string) => void }) => {
               const urlParts = pokemon.url.split("/");
               pokemon.id = parseInt(urlParts[urlParts.length - 2]);
               return {
+                id: pokemon.id,
                 name: pokemon.name,
                 displayName:
                   pokemon.name.charAt(0).toUpperCase() +
@@ -36,8 +39,8 @@ const PokemonList = ({ onSelect }: { onSelect: (name: string) => void }) => {
       }
     };
 
-    fetchPokemonList();
-  }, []);
+    fetchPokemonList(visibleItems + loadMoreThreshold);
+  }, [visibleItems]);
 
   const handleScroll = () => {
     if (
@@ -59,27 +62,33 @@ const PokemonList = ({ onSelect }: { onSelect: (name: string) => void }) => {
     return <p className="badge-lg badge-danger">{error}</p>;
   }
 
+  if (!pokemonList.length) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="z-0 grid w-full grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-4">
       {pokemonList.slice(0, visibleItems).map((pokemon) => (
         <div
-          key={pokemon.name}
-          onClick={() => onSelect(pokemon.name)}
+          key={pokemon.id}
           className="p-4 transition-all border rounded-lg cursor-pointer hover:shadow-lg"
         >
-          <img
-            src={pokemon.image}
-            alt={pokemon.name}
-            className="object-contain w-full mb-2"
-          />
-          <h3 className="text-lg font-medium text-center">
-            {pokemon.displayName}
-          </h3>
+          <Link to={`/pokemon/${pokemon.name}`}>
+            <img
+              src={pokemon.image}
+              alt={pokemon.name}
+              className="object-contain w-full mb-2"
+            />
+            <h3 className="text-lg font-medium text-center">
+              {pokemon.displayName}
+            </h3>
+          </Link>
         </div>
       ))}
+
       {visibleItems < pokemonList.length && (
         <div className="mt-4 text-center col-span-full">
-          <p className="">Scroll to load more...</p>
+          <p>Scroll to load more...</p>
         </div>
       )}
     </div>
