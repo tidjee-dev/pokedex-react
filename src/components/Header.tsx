@@ -65,35 +65,6 @@ const Header = ({ onSearch }: { onSearch: (name: string) => void }) => {
             </span>
           </h1>
         </div>
-        {/* <div className="text-base font-semibold mobile:text-lg">
-          <input
-            type="text"
-            list="pokemon-options"
-            placeholder="Search a Pokemon ..."
-            className="p-1 rounded-lg placeholder:text-center mobile:placeholder:pl-2 mobile:placeholder:text-left bg-danger-subtle placeholder:text-muted"
-            aria-label="Search for a Pokémon"
-            onChange={handleSearch}
-          />
-          <datalist id="pokemon-options">
-            {filteredPokemon.map((pokemon) => (
-              <option
-                key={pokemon}
-                value={pokemon}
-                aria-label={pokemon}
-                onClick={() => handleSelectPokemon(pokemon)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    handleSelectPokemon(pokemon);
-                  }
-                }}
-                className="cursor-pointer"
-              >
-                {pokemon}
-              </option>
-            ))}
-          </datalist>
-        </div> */}
-
         <div className="relative text-base font-semibold mobile:text-lg">
           <input
             type="text"
