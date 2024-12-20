@@ -65,7 +65,7 @@ const Header = ({ onSearch }: { onSearch: (name: string) => void }) => {
             </span>
           </h1>
         </div>
-        <div className="text-base font-semibold mobile:text-lg">
+        {/* <div className="text-base font-semibold mobile:text-lg">
           <input
             type="text"
             list="pokemon-options"
@@ -92,6 +92,35 @@ const Header = ({ onSearch }: { onSearch: (name: string) => void }) => {
               </option>
             ))}
           </datalist>
+        </div> */}
+
+        <div className="relative text-base font-semibold mobile:text-lg">
+          <input
+            type="text"
+            placeholder="Search a Pokémon..."
+            className="w-full p-1 text-center border border-gray-300 rounded-lg shadow-sm mobile:pl-2 mobile:text-left bg-danger-subtle placeholder:text-muted "
+            aria-label="Search for a Pokémon"
+            onChange={handleSearch}
+          />
+          {filteredPokemon.length > 0 && (
+            <ul className="absolute left-0 z-10 w-full mt-2 overflow-y-auto bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 bg-opacity-40">
+              {filteredPokemon.map((pokemon) => (
+                <li
+                  key={pokemon}
+                  tabIndex={0}
+                  onClick={() => handleSelectPokemon(pokemon)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter") {
+                      handleSelectPokemon(pokemon);
+                    }
+                  }}
+                  className="p-1 cursor-pointer hover:bg-danger-subtle mobile:text-left focus:border-2 focus:outline-danger-light focus:bg-danger-subtle backdrop-blur-md"
+                >
+                  {pokemon}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </nav>
     </header>
